@@ -263,6 +263,7 @@ public class accountsForm extends JInternalFrame implements ActionListener,Mouse
 					
 					con.execUpdate("UPDATE users SET fullname= '"+fnText.getText()+"', role= '"+roleBox.getSelectedItem()+"',email= '"+emailText.getText()+"',password= '"+passText.getText()+"' WHERE userid= '"+userid+"' ");
 					JOptionPane.showMessageDialog(null, "Update Success!");
+					mainTable.getSelectionModel().clearSelection();
 					}else if(mainTable.getRowCount()==0) {
 						JOptionPane.showMessageDialog(null, "Please select data to be updated first");
 					}
@@ -295,6 +296,7 @@ public class accountsForm extends JInternalFrame implements ActionListener,Mouse
 			
 			con.execUpdate("DELETE FROM users WHERE userid= '"+userid+"' ");
 			JOptionPane.showMessageDialog(null, "Update Success!");
+			mainTable.getSelectionModel().clearSelection();
 			}else if(mainTable.getRowCount()==0) {
 				JOptionPane.showMessageDialog(null, "Please select data to be deleted first");
 			}
@@ -316,6 +318,7 @@ public class accountsForm extends JInternalFrame implements ActionListener,Mouse
 		String tblrole = dtm.getValueAt(mainTable.getSelectedRow(), 2).toString();
 		String tblEmail = dtm.getValueAt(mainTable.getSelectedRow(), 3).toString();
 		String tblPassword = dtm.getValueAt(mainTable.getSelectedRow(), 4).toString();
+		
 		useridLbl.setText(userid);
 		fnText.setText(tblFn);;
 		roleBox.setSelectedItem(tblrole);
@@ -343,7 +346,7 @@ public class accountsForm extends JInternalFrame implements ActionListener,Mouse
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

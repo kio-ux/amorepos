@@ -187,6 +187,7 @@ public class menuForm extends JInternalFrame implements ActionListener,MouseList
 				
 				con.execUpdate("UPDATE menu SET name= '"+name+"',sellprice= '"+sellPrice+"',ingredientprice= '"+ingPrice+"' WHERE menuid= '"+menuid+"'");
 				JOptionPane.showMessageDialog(null, "Update Success!");
+				mainTable.getSelectionModel().clearSelection();
 				}else if(mainTable.getRowCount()==0) {
 					JOptionPane.showMessageDialog(null, "Please select data to be updated first");
 				}
@@ -213,6 +214,7 @@ public class menuForm extends JInternalFrame implements ActionListener,MouseList
 			
 			con.execUpdate("DELETE FROM users WHERE userid= '"+menuid+"' ");
 			JOptionPane.showMessageDialog(null, "Update Success!");
+			mainTable.getSelectionModel().clearSelection();
 			}else if(mainTable.getRowCount()==0) {
 				JOptionPane.showMessageDialog(null, "Please select data to be deleted first");
 			}
