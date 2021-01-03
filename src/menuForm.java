@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class menuForm extends JInternalFrame implements ActionListener,MouseListener{
-	private JLabel idLbl,nameLbl,sellLbl,priceLbl,menuidLbl;
+	 private JLabel idLbl,nameLbl,sellLbl,priceLbl,menuidLbl;
 	 private JTextField nameText, spText,ipText;
 	 private JButton insertBtn,UpdateBtn,DeleteBtn;
 	 private JTable mainTable;
@@ -148,6 +148,9 @@ public class menuForm extends JInternalFrame implements ActionListener,MouseList
 		
 		
 	}
+	public void tableUpdate() {
+		  dtm.fireTableDataChanged();
+	  }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -164,6 +167,7 @@ public class menuForm extends JInternalFrame implements ActionListener,MouseList
 			}else {
 				con.insertIntoMenu(sName, sPrice, sIng);
 				JOptionPane.showMessageDialog(null, "Insert Success!");
+				tableUpdate();
 			}
 		}else if (e.getSource() == UpdateBtn) {
 			if (validateAll(sName, sPrice, sIng) == false) {
@@ -186,6 +190,7 @@ public class menuForm extends JInternalFrame implements ActionListener,MouseList
 				dtm.setValueAt(ingPrice, mainTable.getSelectedRow(), 3);
 				
 				con.execUpdate("UPDATE menu SET name= '"+name+"',sellprice= '"+sellPrice+"',ingredientprice= '"+ingPrice+"' WHERE menuid= '"+menuid+"'");
+				tableUpdate();
 				JOptionPane.showMessageDialog(null, "Update Success!");
 				mainTable.getSelectionModel().clearSelection();
 				}else if(mainTable.getRowCount()==0) {
@@ -215,6 +220,7 @@ public class menuForm extends JInternalFrame implements ActionListener,MouseList
 			con.execUpdate("DELETE FROM users WHERE userid= '"+menuid+"' ");
 			JOptionPane.showMessageDialog(null, "Update Success!");
 			mainTable.getSelectionModel().clearSelection();
+			tableUpdate();
 			}else if(mainTable.getRowCount()==0) {
 				JOptionPane.showMessageDialog(null, "Please select data to be deleted first");
 			}

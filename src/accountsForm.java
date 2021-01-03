@@ -205,6 +205,10 @@ public class accountsForm extends JInternalFrame implements ActionListener,Mouse
 		return true;
 
 	}
+	public void tableUpdate() {
+		  dtm.fireTableDataChanged();
+	  }
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -227,6 +231,7 @@ public class accountsForm extends JInternalFrame implements ActionListener,Mouse
 //					con.insertIntousersID();
 					con.insertIntoUsers(fnText.getText(), roleBox.getSelectedItem(), emailText.getText(), passText.getText());
 					JOptionPane.showMessageDialog(null, "Insert Success!");
+					tableUpdate();
 
 					
 				}
@@ -263,6 +268,7 @@ public class accountsForm extends JInternalFrame implements ActionListener,Mouse
 					
 					con.execUpdate("UPDATE users SET fullname= '"+fnText.getText()+"', role= '"+roleBox.getSelectedItem()+"',email= '"+emailText.getText()+"',password= '"+passText.getText()+"' WHERE userid= '"+userid+"' ");
 					JOptionPane.showMessageDialog(null, "Update Success!");
+					tableUpdate();
 					mainTable.getSelectionModel().clearSelection();
 					}else if(mainTable.getRowCount()==0) {
 						JOptionPane.showMessageDialog(null, "Please select data to be updated first");
@@ -296,6 +302,7 @@ public class accountsForm extends JInternalFrame implements ActionListener,Mouse
 			
 			con.execUpdate("DELETE FROM users WHERE userid= '"+userid+"' ");
 			JOptionPane.showMessageDialog(null, "Update Success!");
+			tableUpdate();
 			mainTable.getSelectionModel().clearSelection();
 			}else if(mainTable.getRowCount()==0) {
 				JOptionPane.showMessageDialog(null, "Please select data to be deleted first");

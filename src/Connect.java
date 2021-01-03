@@ -37,8 +37,30 @@ public ResultSet execQuery(String query) {
 		}
 		return rs;
 	}
+public void insertIntoTransactionDetail(String menuid,String quantity) {
+	 Random rand = new Random();
+	  String karakter = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	  String userID = "";
+
+	  for (int i = 0; i < 10; i++) {
+	   Integer index = rand.nextInt(karakter.length());
+	   char x = karakter.charAt(index);
+	   userID += x;
+	  }
+	  try {
+		pst = con.prepareStatement("INSERT INTO transactiondetail VALUES (?,?,?)");
+		pst.setString(1, userID);
+		pst.setString(2, menuid);
+		pst.setString(3, quantity);
+		pst.execute();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	  
+	
+}
 public void insertIntoUsers( String fullname , Object role, String email,String password) {
-	Random rand = new Random();
+	  Random rand = new Random();
 	  String karakter = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	  String userID = "";
 
@@ -80,7 +102,7 @@ public void insertIntoMenu(String name,String sellprice,String ingredientprice) 
 	   menuID += x;
 	  }
 	try {
-		pst = con.prepareStatement("INSERT INTO users VALUES (?,?,?,?)");
+		pst = con.prepareStatement("INSERT INTO menu VALUES (?,?,?,?)");
 		pst.setString(1,menuID);
 		pst.setString(2, name);
 		pst.setObject(3, sellprice);
